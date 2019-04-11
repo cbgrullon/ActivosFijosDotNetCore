@@ -1,0 +1,14 @@
+﻿@model ActivosFijosDotNetCore.ViewModels.ResultadoApiViewModel
+@{
+    ViewData["Title"] = "Resultado";
+}
+
+<div class="card" style="padding-top:2%">
+    <div class="card-heading">
+        Resultado Envio de Asientos
+    </div>
+    <div class="card-body">
+        @Html.Raw(Model.Message)
+    </div>
+</div>
+

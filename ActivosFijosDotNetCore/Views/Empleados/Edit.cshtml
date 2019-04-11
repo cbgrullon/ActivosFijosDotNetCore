@@ -34,9 +34,7 @@
                 <span asp-validation-for="TipoPersona" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FechaIngreso" class="control-label"></label>
-                <input asp-for="FechaIngreso" class="form-control" />
-                <span asp-validation-for="FechaIngreso" class="text-danger"></span>
+                @Html.HiddenFor(x=>x.FechaIngreso)
             </div>
             <div class="form-group">
                 <label asp-for="IdEstado" class="control-label"></label>

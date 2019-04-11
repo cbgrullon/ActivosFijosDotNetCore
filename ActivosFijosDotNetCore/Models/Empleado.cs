@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ActivosFijosDotNetCore.Models
 {
@@ -10,6 +11,8 @@ namespace ActivosFijosDotNetCore.Models
         public string Cedula { get; set; }
         public int IdDepartamento { get; set; }
         public string TipoPersona { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [Display(Name = "Fecha Ingreso")]
         public DateTime FechaIngreso { get; set; }
         public string IdEstado { get; set; }
 

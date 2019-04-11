@@ -104,11 +104,8 @@ namespace ActivosFijosDotNetCore.Controllers
             {
                 try
                 {
-                    if (ValidaCedula(empleado.Cedula))
-                    {
-                        _context.Update(empleado);
-                        await _context.SaveChangesAsync();
-                    }
+                    _context.Update(empleado);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {

@@ -77,7 +77,7 @@ namespace ActivosFijosDotNetCore.Controllers
                         Detalle = detalles
                     });
                 }
-                return RedirectToAction("Index", "Home");
+                return View("Resultado", new ResultadoApiViewModel { Message="Completado"});
             }
             return View(solicitud);
         }
