@@ -39,29 +39,32 @@ namespace ActivosFijosDotNetCore.Controllers
                         {
                             decimal depreciado = af.DepreciacionPorAnno / 12;
                             MontoDB += depreciado;
-                            var totalDepreciado = cd.Max(x => x.DepreciacionAcumulada);
+                            decimal totalDepreciado = 0;
+                            if (cd.Count > 0)
+                                totalDepreciado = cd.Max(x => x.DepreciacionAcumulada);
                             totalDepreciado += MontoDB;
                             MontoCR = af.ValorCompra - totalDepreciado;
+                            TipoActivo ta = ActivosFijosDB.TipoActivo.FirstOrDefault(x=>x.Id==af.IdTipoActivo);
                             ActivosFijosDB.CalculoDepreciacion.Add(new CalculoDepreciacion
                             {
                                 IdActivoFijo = af.Id,
                                 DepreciacionAcumulada = totalDepreciado,
                                 FechaProceso = solicitud.FechaFin,
-                                CuentaDepreciacion = af.IdTipoActivoNavigation.CuentaDepreciacion,
-                                CuentaCompra = af.IdTipoActivoNavigation.CuentaCompra,
+                                CuentaDepreciacion = ta.CuentaDepreciacion,
+                                CuentaCompra = ta.CuentaCompra,
                                 MontoDepreciado = depreciado
                             });
                             detalles.Add(new Detalle
                             {
-                                Monto=MontoDB,
-                                NumeroCuenta= af.IdTipoActivoNavigation.CuentaCompra,
-                                TipoTransaccion="DB"
+                                Monto = MontoDB,
+                                NumeroCuenta = ta.CuentaCompra,
+                                TipoTransaccion = "DB"
                             });
                             detalles.Add(new Detalle
                             {
-                                Monto=MontoCR,
-                                NumeroCuenta = af.IdTipoActivoNavigation.CuentaDepreciacion,
-                                TipoTransaccion= "CR"
+                                Monto = MontoCR,
+                                NumeroCuenta = ta.CuentaDepreciacion,
+                                TipoTransaccion = "CR"
                             });
                         }
                     }
@@ -74,7 +77,7 @@ namespace ActivosFijosDotNetCore.Controllers
                         Detalle = detalles
                     });
                 }
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
             return View(solicitud);
         }
