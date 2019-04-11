@@ -1,0 +1,29 @@
+﻿@model ActivosFijosDotNetCore.ViewModels.SolicitudAsientoViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-5">
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </div>
+        <div class="col-md-5">
+            @Html.DisplayNameFor(model => model.FechaFin)
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            @Html.TextBoxFor(model => model.FechaInicio,new { @class="form-control",type="date"})
+        </div>
+        <div class="col-md-5">
+            @Html.TextBoxFor(model => model.FechaFin,new { @class="form-control",type="date"})
+        </div>
+        <div class="col-md-2">
+            <input type="submit" class="btn btn-success btn-block" value="Enviar Asientos"/>
+        </div>
+    </div>
+}

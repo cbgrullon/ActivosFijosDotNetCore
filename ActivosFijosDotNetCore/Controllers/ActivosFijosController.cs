@@ -60,17 +60,18 @@ namespace ActivosFijosDotNetCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descripcion,IdDepartamento,IdTipoActivo,FechaRegistro,ValorCompra,DepreciacionAcumulada,IdEstado")] ActivosFijos activosFijos)
+        public async Task<IActionResult> Create([Bind("Id,Descripcion,IdDepartamento,IdTipoActivo,ValorCompra,DepreciacionPorAnno,AnnosDeDepreciacion,IdEstado")] ActivosFijos activosFijos)
         {
             if (ModelState.IsValid)
             {
+                activosFijos.FechaRegistro = DateTime.Now;
                 _context.Add(activosFijos);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdDepartamento"] = new SelectList(_context.Departamento, "Id", "Descripcion", activosFijos.IdDepartamento);
             ViewData["IdEstado"] = new SelectList(_context.Estado, "Id", "Descripcion", activosFijos.IdEstado);
-            ViewData["IdTipoActivo"] = new SelectList(_context.TipoActivo, "Id", "CuentaCompra", activosFijos.IdTipoActivo);
+            ViewData["IdTipoActivo"] = new SelectList(_context.TipoActivo, "Id", "Descripcion", activosFijos.IdTipoActivo);
             return View(activosFijos);
         }
 
@@ -89,7 +90,7 @@ namespace ActivosFijosDotNetCore.Controllers
             }
             ViewData["IdDepartamento"] = new SelectList(_context.Departamento, "Id", "Descripcion", activosFijos.IdDepartamento);
             ViewData["IdEstado"] = new SelectList(_context.Estado, "Id", "Descripcion", activosFijos.IdEstado);
-            ViewData["IdTipoActivo"] = new SelectList(_context.TipoActivo, "Id", "CuentaCompra", activosFijos.IdTipoActivo);
+            ViewData["IdTipoActivo"] = new SelectList(_context.TipoActivo, "Id", "Descripcion", activosFijos.IdTipoActivo);
             return View(activosFijos);
         }
 
@@ -98,7 +99,7 @@ namespace ActivosFijosDotNetCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion,IdDepartamento,IdTipoActivo,FechaRegistro,ValorCompra,DepreciacionAcumulada,IdEstado")] ActivosFijos activosFijos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion,IdDepartamento,IdTipoActivo,FechaRegistro,ValorCompra,DepreciacionPorAnno,AnnosDeDepreciacion,IdEstado")] ActivosFijos activosFijos)
         {
             if (id != activosFijos.Id)
             {
@@ -127,7 +128,7 @@ namespace ActivosFijosDotNetCore.Controllers
             }
             ViewData["IdDepartamento"] = new SelectList(_context.Departamento, "Id", "Descripcion", activosFijos.IdDepartamento);
             ViewData["IdEstado"] = new SelectList(_context.Estado, "Id", "Descripcion", activosFijos.IdEstado);
-            ViewData["IdTipoActivo"] = new SelectList(_context.TipoActivo, "Id", "CuentaCompra", activosFijos.IdTipoActivo);
+            ViewData["IdTipoActivo"] = new SelectList(_context.TipoActivo, "Id", "Descripcion", activosFijos.IdTipoActivo);
             return View(activosFijos);
         }
 

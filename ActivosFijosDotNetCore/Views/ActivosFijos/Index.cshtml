@@ -22,7 +22,10 @@
                 @Html.DisplayNameFor(model => model.ValorCompra)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DepreciacionAcumulada)
+                @Html.DisplayNameFor(model => model.DepreciacionPorAnno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnnosDeDepreciacion)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdDepartamentoNavigation)
@@ -49,7 +52,10 @@
                 @Html.DisplayFor(modelItem => item.ValorCompra)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DepreciacionAcumulada)
+                @Html.DisplayFor(modelItem => item.DepreciacionPorAnno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnnosDeDepreciacion)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdDepartamentoNavigation.Descripcion)

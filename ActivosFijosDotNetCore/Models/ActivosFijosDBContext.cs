@@ -24,13 +24,23 @@ namespace ActivosFijosDotNetCore.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=DESKTOP-3LH26OJ;Database=ActivosFijosDB;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated security=true");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ActivosFijos>(entity =>
             {
+                entity.HasIndex(e => e.IdDepartamento);
+
+                entity.HasIndex(e => e.IdEstado);
+
+                entity.HasIndex(e => e.IdTipoActivo);
+
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -64,6 +74,8 @@ namespace ActivosFijosDotNetCore.Models
 
             modelBuilder.Entity<CalculoDepreciacion>(entity =>
             {
+                entity.HasIndex(e => e.IdActivoFijo);
+
                 entity.Property(e => e.CuentaCompra)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -85,6 +97,8 @@ namespace ActivosFijosDotNetCore.Models
 
             modelBuilder.Entity<Departamento>(entity =>
             {
+                entity.HasIndex(e => e.IdEstado);
+
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -104,6 +118,10 @@ namespace ActivosFijosDotNetCore.Models
 
             modelBuilder.Entity<Empleado>(entity =>
             {
+                entity.HasIndex(e => e.IdDepartamento);
+
+                entity.HasIndex(e => e.IdEstado);
+
                 entity.Property(e => e.Cedula)
                     .IsRequired()
                     .HasMaxLength(11)
@@ -154,6 +172,8 @@ namespace ActivosFijosDotNetCore.Models
 
             modelBuilder.Entity<TipoActivo>(entity =>
             {
+                entity.HasIndex(e => e.IdEstado);
+
                 entity.Property(e => e.CuentaCompra)
                     .IsRequired()
                     .HasMaxLength(50)

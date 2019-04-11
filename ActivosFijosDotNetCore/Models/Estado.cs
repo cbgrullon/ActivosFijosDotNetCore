@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace ActivosFijosDotNetCore.Models
 {
@@ -15,7 +14,6 @@ namespace ActivosFijosDotNetCore.Models
         }
 
         public string Id { get; set; }
-        [Display(Name="Estado")]
         public string Descripcion { get; set; }
 
         public ICollection<ActivosFijos> ActivosFijos { get; set; }

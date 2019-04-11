@@ -16,7 +16,7 @@ namespace ActivosFijosDotNetCore.Models
         public string TipoTransaccion { get; set; }
 
         [JsonProperty("monto")]
-        public int Monto { get; set; }
+        public decimal Monto { get; set; }
     }
 
     public class ApiRequest
